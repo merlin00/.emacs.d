@@ -10,3 +10,17 @@
   (package-install 'use-package))
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/org-cfg/emacs-cfg.org"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (jedi anaconda-mode elpy yasnippet flycheck exec-path-from-shell org-plus-contrib which-key use-package try solarized-theme ox-reveal org-bullets iedit helm counsel auto-complete ace-window))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -24,7 +24,7 @@
 
 ** Font Setup
    #+BEGIN_SRC emacs-lisp
-     ;(add-to-list 'default-frame-alist '(font . "Monospace-12"))
+     (add-to-list 'default-frame-alist '(font . "Monospace-14"))
    #+END_SRC
 
 * The Default Packages for Editing

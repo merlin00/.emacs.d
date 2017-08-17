@@ -19,7 +19,7 @@
    #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
     :ensure t
-    :config (load-theme 'solarized-dark t))
+    :config (load-theme 'leuven t))
    #+END_SRC
 
 ** Font Setup
@@ -35,6 +35,7 @@
        :init
        (progn
 	 (ac-config-default)
+	 (setq ac-show-menu-immediately-on-auto-complete t)
 	 (global-auto-complete-mode t)
 	 ))
    #+END_SRC
@@ -171,25 +172,19 @@
 ** Setup default mode
    #+BEGIN_SRC emacs-lisp
      (add-hook 'python-mode-hook 'flycheck-mode)
-     (add-hook 'Python-mode-hook 'yas-minor-mode)
-   #+END_SRC
-
-** elpy
-   #+BEGIN_SRC emacs-lisp
-     (use-package elpy
-       :ensure t
-       :init (elpy-enable))
-
+     (add-hook 'python-mode-hook 'yas-minor-mode)
+     (add-hook 'python-mode-hook 'linum-mode)
    #+END_SRC
 
 ** anaconda-mode
    #+BEGIN_SRC emacs-lisp
      (use-package anaconda-mode
        :ensure t
-       :init (add-hook 'python-mode-hook 'anaconda-mode))
+       :init (add-hook 'python-mode-hook 'anaconda-mode)
+       )
 
    #+END_SRC
-
+nnn
 ** jedi
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
@@ -197,6 +192,8 @@
        :init
        (progn
 	 (add-hook 'python-mode-hook 'jedi:setup)
+	 (setq jedi:setup-keys t)
+	 (setq jedi:complete-on-dot t)
 	 (add-hook 'python-mode-hook 'jedi:ac-setup)
 	 ))
 

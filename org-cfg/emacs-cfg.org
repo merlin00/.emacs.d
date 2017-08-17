@@ -19,10 +19,10 @@
    #+END_SRC
 ** Font Setup
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'default-frame-alist '(font . "Menlo-12"))
+     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
 
    #+END_SRC
-* Edit Default Packages
+* Default Packages for Editing
 ** autocomplte 
    #+BEGIN_SRC emacs-lisp
      (use-package auto-complete
@@ -79,6 +79,18 @@
        :ensure t)
 
    #+END_SRC
+** helm
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm
+       :ensure t
+       :init 
+       (progn
+	 (require 'helm-config)
+	 (helm-mode 1)
+	 (global-set-key (kbd "M-x") 'helm-M-x)
+	 (global-set-key (kbd "C-x C-f") 'helm-find-files)))
+    
+   #+END_SRC
 * The Packages for Org-mode
 ** org-bullets
    #+BEGIN_SRC emacs-lisp
@@ -88,6 +100,14 @@
        (progn
 	 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 	 ))
+   #+END_SRC
+** reveal.js
+   #+BEGIN_SRC emacs-lisp
+     (use-package ox-reveal
+       :ensure t)
+
+     (use-package org-plus-contrib
+       :ensure t)
    #+END_SRC
 
 * Common Packages for Developement
@@ -131,7 +151,7 @@
        :init (add-hook 'python-mode-hook 'anaconda-mode))
 
    #+END_SRC
-**  jedi
+** jedi
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
        :ensure t
@@ -143,11 +163,4 @@
 
    #+END_SRC
 
-* Reveal.js
-#+BEGIN_SRC emacs-lisp
-  (use-package ox-reveal
-    :ensure t)
 
-  (use-package org-plus-contrib
-    :ensure t)
-#+END_SRC

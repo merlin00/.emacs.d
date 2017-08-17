@@ -3,7 +3,7 @@
 #+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
 
 * Emacs Appearance
-** Default Setup
+** Default Setnup
    #+BEGIN_SRC emacs-lisp
      (setq-default inhibit-startup-message t
 	   truncate-lines t)
@@ -11,8 +11,8 @@
      (global-hl-line-mode t)
      (scroll-bar-mode -1)
 
-     (add-to-list 'default-frame-alist '(height . 80))
-     (add-to-list 'default-frame-alist '(width . 120))
+     (add-to-list 'default-frame-alist '(height . 70))
+     (add-to-list 'default-frame-alist '(width . 100))
    #+END_SRC
 
 ** Color Theme
@@ -201,5 +201,3 @@
 	 ))
 
    #+END_SRC
-
-

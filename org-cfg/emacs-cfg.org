@@ -54,6 +54,7 @@
    #+END_SRC
 
 ** ace-window
+   - Easy to window selection 
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
        :ensure t
@@ -167,15 +168,15 @@
 ** yasnippet
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
-       :ensure t)
+       :ensure t
+       :init (yas-global-mode 1))
 
    #+END_SRC
 
 * Python
-** Setup default mode
+** Default modes for python developement
    #+BEGIN_SRC emacs-lisp
      (add-hook 'python-mode-hook 'flycheck-mode)
-     (add-hook 'python-mode-hook 'yas-minor-mode)
      (add-hook 'python-mode-hook 'linum-mode)
    #+END_SRC
 
@@ -212,4 +213,19 @@
 	 (require 'ein-loaddefs)
 	 (require 'ein-notebook)
 	 (require 'ein-subpackages)))
+
+     (use-package websocket
+       :ensure t)
+
+     (use-package request
+       :ensure t)
+
+     (use-package ob-ipython
+       :ensure t
+       :config
+       (progn
+	 (org-babel-do-load-languages
+	  'org-babel-load-languages
+	  '((ipython .t)))
+	 ))
    #+END_SRC

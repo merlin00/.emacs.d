@@ -2,31 +2,31 @@
 #+TITLE: Emacs Init
 #+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
 
-* Emacs Appearance
-** Default Setnup
-   #+BEGIN_SRC emacs-lisp
-     (setq-default inhibit-startup-message t
-	   truncate-lines t)
-     (tool-bar-mode -1)
-     (global-hl-line-mode t)
-     (scroll-bar-mode -1)
+* Appearance
+  - Initial Frame Configuration 
+    #+BEGIN_SRC emacs-lisp
+      (setq-default inhibit-startup-message t
+		    truncate-lines t)
+      (tool-bar-mode -1)
+      (global-hl-line-mode t)
+      (scroll-bar-mode -1)
 
-     (add-to-list 'default-frame-alist '(height . 65))
-     (add-to-list 'default-frame-alist '(width . 120))
-   #+END_SRC
+      (add-to-list 'default-frame-alist '(height . 65))
+      (add-to-list 'default-frame-alist '(width . 120))
+    #+END_SRC
+  - Initial Theme
+    #+BEGIN_SRC emacs-lisp
+      (load-theme 'leuven t)
+    #+END_SRC
+  - Default Font
+    #+BEGIN_SRC emacs-lisp
+      (unless (eq system-type 'darwin)
+	(add-to-list 'default-frame-alist '(font . "Monospace-10")))
 
-** Color Theme
-   #+BEGIN_SRC emacs-lisp
-  (use-package solarized-theme
-    :ensure t
-    :config (load-theme 'leuven t))
-   #+END_SRC
-
-** Font Setup
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'default-frame-alist '(font . "Monospace-10"))
-   #+END_SRC
-
+      (if (eq system-type 'darwin)
+	  (add-to-list 'default-frame-alist '(font . "Menlo 12")))
+    #+END_SRC
+   
 * The Default Packages for Editing
 ** autocomplte
    #+BEGIN_SRC emacs-lisp
@@ -206,13 +206,7 @@
 ** EIN (Emacs IPython Notebook)
    #+BEGIN_SRC emacs-lisp
      (use-package ein
-       :ensure t
-       :init
-       (progn
-	 (require 'ein)
-	 (require 'ein-loaddefs)
-	 (require 'ein-notebook)
-	 (require 'ein-subpackages)))
+       :ensure t)
 
      (use-package websocket
        :ensure t)

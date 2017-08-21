@@ -5,8 +5,7 @@
 * Appearance
   - Initial Frame Configuration 
     #+BEGIN_SRC emacs-lisp
-      (setq-default inhibit-startup-message t
-		    truncate-lines t)
+      (setq-default inhibit-startup-message t)
       (tool-bar-mode -1)
       (global-hl-line-mode t)
       (scroll-bar-mode -1)
@@ -38,6 +37,18 @@
 	 (setq ac-show-menu-immediately-on-auto-complete t)
 	 (global-auto-complete-mode t)
 	 ))
+   #+END_SRC
+
+** ac-ispell
+   #+BEGIN_SRC emacs-lisp
+     (use-package ac-ispell
+       :ensure t
+       :init
+       (progn
+	 (setq ac-ispell-requires 4)
+	 (setq ac-ispell-fuzzy-limit 2)
+	 (setq ispell-dictionary "en_US")
+	 (ac-ispell-setup)))
    #+END_SRC
 
 ** try
@@ -131,6 +142,11 @@
    #+END_SRC 
 
 * The Packages for Org-mode
+  - aspell setup
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'org-mode-hook 'flyspell-mode)
+      (add-hook 'org-mode-hook 'ac-ispell-ac-setup)
+    #+END_SRC
 ** org-bullets
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
@@ -150,7 +166,7 @@
        :ensure t)
    #+END_SRC
 
-* Common Packages for Developement
+* Common Packages for Development
 ** exec-path-from-shell
    #+BEGIN_SRC emacs-lisp
      (use-package exec-path-from-shell

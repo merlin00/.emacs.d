@@ -205,6 +205,16 @@
 
    #+END_SRC
 
+** elpy
+   #+BEGIN_SRC emacs-lisp
+     (use-package elpy
+       :ensure t
+       :init
+       (progn
+	 (add-hook 'python-mode-hook 'elpy-enable)
+	 ))
+   #+END_SRC
+
 ** jedi
    #+BEGIN_SRC emacs-lisp
      (use-package jedi

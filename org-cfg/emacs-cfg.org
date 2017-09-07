@@ -15,7 +15,7 @@
     #+END_SRC
   - Initial Theme
     #+BEGIN_SRC emacs-lisp
-      (load-theme 'leuven t)
+      (load-theme 'solarized-dark t)
     #+END_SRC
   - Default Font
     #+BEGIN_SRC emacs-lisp
@@ -47,7 +47,7 @@
        (progn
 	 (setq ac-ispell-requires 4)
 	 (setq ac-ispell-fuzzy-limit 2)
-	 (setq ispell-dictionary "en_US")
+	 (setq ispell-dictionary "english")
 	 (ac-ispell-setup)))
    #+END_SRC
 
@@ -222,12 +222,6 @@
 ** EIN (Emacs IPython Notebook)
    #+BEGIN_SRC emacs-lisp
      (use-package ein
-       :ensure t)
-
-     (use-package websocket
-       :ensure t)
-
-     (use-package request
        :ensure t)
 
      (use-package ob-ipython

@@ -196,15 +196,6 @@
      (add-hook 'python-mode-hook 'linum-mode)
    #+END_SRC
 
-** anaconda-mode
-   #+BEGIN_SRC emacs-lisp
-     (use-package anaconda-mode
-       :ensure t
-       :init (add-hook 'python-mode-hook 'anaconda-mode)
-       )
-
-   #+END_SRC
-
 ** elpy
    #+BEGIN_SRC emacs-lisp
      (use-package elpy

@@ -20,7 +20,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elpy htmlize yasnippet which-key use-package try solarized-theme pyvenv ox-reveal org-plus-contrib org-bullets magit jedi iedit highlight-indentation helm flycheck find-file-in-project exec-path-from-shell counsel company anaconda-mode ace-window))))
+    (elpy htmlize yasnippet which-key use-package try solarized-theme pyvenv ox-reveal org-plus-contrib org-bullets magit jedi iedit highlight-indentation helm flycheck find-file-in-project exec-path-from-shell counsel company ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

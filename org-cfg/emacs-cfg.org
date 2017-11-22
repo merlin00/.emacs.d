@@ -15,7 +15,9 @@
     #+END_SRC
   - Initial Theme
     #+BEGIN_SRC emacs-lisp
-      (load-theme 'solarized-dark t)
+      (use-package color-theme-solarized
+	:ensure t
+	:init (load-theme 'solarized t))
     #+END_SRC
   - Default Font
     #+BEGIN_SRC emacs-lisp
@@ -23,6 +25,7 @@
 	(add-to-list 'default-frame-alist '(font . "Monospace-10")))
 
       (if (eq system-type 'darwin)
+	  (setq mac-command-modifier 'control)
 	  (add-to-list 'default-frame-alist '(font . "Menlo 12")))
     #+END_SRC
    
@@ -233,13 +236,4 @@
    #+BEGIN_SRC emacs-lisp
      (use-package ein
        :ensure t)
-
-     (use-package ob-ipython
-       :ensure t
-       :config
-       (progn
-	 (org-babel-do-load-languages
-	  'org-babel-load-languages
-	  '((ipython .t)))
-	 ))
    #+END_SRC

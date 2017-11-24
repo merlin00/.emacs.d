@@ -1,0 +1,34 @@
+#+startup: overview
+#+title: Emacs Configuration
+
+* Appearance
+  - [[~/.emacs.d/org/basic.org][Frame & Window Style]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/basic.org"))
+    #+end_src
+
+* Common Packages for Editing
+  - [[~/.emacs.d/org/autopkg.org][Auto Complete]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/autopkg.org"))
+    #+end_src
+  - [[~/.emacs.d/org/editpkg.org][Search & Editing & Help]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/editpkg.org"))
+    #+end_src
+    
+* Program Languages
+  - [[~/.emacs.d/org/utility.org][Utility]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/utility.org"))
+    #+end_src
+
+  - [[~/.emacs.d/org/pythonpkg.org][Python]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/pythonpkg.org"))
+    #+end_src
+
+  - [[~/.emacs.d/org/orgpkg.org][Org-mode]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/orgpkg.org"))
+    #+end_src

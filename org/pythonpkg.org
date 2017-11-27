@@ -10,7 +10,8 @@
       :ensure t
       :init
       (progn
-        (add-hook 'python-mode-hook 'elpy-enable)))
+	(pyvenv-activate "~/miniconda3")
+	(add-hook 'python-mode-hook 'elpy-enable)))
   #+end_src
 
 * jedi package

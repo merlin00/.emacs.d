@@ -32,3 +32,8 @@
     #+begin_src emacs-lisp
       (org-babel-load-file (expand-file-name "~/.emacs.d/org/orgpkg.org"))
     #+end_src
+
+  - [[~/.emacs.d/org/latexpkg.org][Latex]]
+    #+begin_src emacs-lisp
+      (org-babel-load-file (expand-file-name "~/.emacs.d/org/latexpkg.org"))
+    #+end_src

@@ -8,6 +8,12 @@
         :ensure t)
     #+end_src
 
+  - Spell
+    #+begin_src emacs-lisp
+      (setq ispell-program-name "aspell")
+      (add-to-list 'exec-path "/user/local/bin")
+    #+end_src
+
 * Search
   - swiper package
     #+begin_src emacs-lisp

@@ -4,6 +4,7 @@
 * elpy package
   #+begin_src emacs-lisp
     (add-hook 'python-mode-hook 'flycheck-mode)
+    (add-hook 'python-mode-hook 'flyspell-prog-mode)
     (add-hook 'python-mode-hook 'linum-mode)
 
     (use-package elpy

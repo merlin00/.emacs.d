@@ -15,7 +15,8 @@
 * reveal.js
   #+begin_src emacs-lisp
     (use-package ox-reveal
-      :ensure t)
+      :ensure t
+      :init (require 'ox-reveal))
 
     (use-package org-plus-contrib
       :ensure t)

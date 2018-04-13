@@ -1,39 +1,235 @@
 #+startup: overview
-#+title: Emacs Configuration
+#+title: Emacs Preferences
 
 * Appearance
-  - [[~/.emacs.d/org/basic.org][Frame & Window Style]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/basic.org"))
-    #+end_src
+** Window Frame
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
 
-* Common Packages for Editing
-  - [[~/.emacs.d/org/autopkg.org][Auto Complete]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/autopkg.org"))
-    #+end_src
-  - [[~/.emacs.d/org/editpkg.org][Search & Editing & Help]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/editpkg.org"))
-    #+end_src
-   
+  (add-to-list 'default-frame-alist '(height . 65))
+  (add-to-list 'default-frame-alist '(width . 120))
+#+end_src
+
+** Window
+#+begin_src emacs-lisp
+  (setq-default inhibit-startup-message t)
+  (setq-default truncate-lines nil)
+
+  ;; (global-hl-line-mode t)
+
+  (add-hook 'json-mode-hook
+	    (lambda ()
+	      (make-local-variable 'js-indent-level)
+	      (setq js-indent-level 2)))
+#+end_src
+
+** Theme
+   - [[https://github.com/nashamri/spacemacs-theme][Spacemac theme]] 
+   - [[https://github.com/milkypostman/powerline][Powerline theme]]
+#+begin_src emacs-lisp
+  (load-theme 'spacemacs-dark t)
+
+  (use-package powerline
+    :ensure t
+    :init (powerline-default-theme))
+#+end_src
+
+** Font
+#+begin_src emacs-lisp
+  (when (eq system-type 'darwin)
+    (add-to-list 'default-frame-alist '(font . "Menlo 12")))
+
+  (when (eq system-type 'gun/linux)
+    (add-to-list 'default-frame-alist '(font . "Monospace-10")))
+#+end_src
+
+* Common Packages
+** Completion
+   - [[https://github.com/auto-complete/auto-complete][AutoComplete]]
+   - [[https://github.com/joaotavora/yasnippet][Yasnippet]]
+   - [[https://github.com/syohex/emacs-ac-ispell][ac-ispell]]
+#+begin_src emacs-lisp
+  (use-package auto-complete
+    :ensure t
+    :init
+    (progn
+      (ac-config-default)
+      (setq ac-show-menu-immediately-on-auto-complete t)
+      (global-auto-complete-mode t)))
+
+  (use-package yasnippet
+    :ensure t
+    :init (yas-global-mode 1))
+
+  (use-package ac-ispell
+    :ensure t
+    :init
+    (progn
+      (add-to-list 'exec-path "/usr/local/bin")
+      (setq ispell-program-name "aspell")
+      (setq ac-ispell-requires 4)
+      (setq ac-ispell-fuzzy-limit 2)
+      (setq ispell-dictionary "english")
+      (ac-ispell-setup)))
+#+end_src
+
+** Search
+#+begin_src emacs-lisp
+  (use-package swiper
+    :ensure t)
+
+  (use-package projectile
+    :ensure t
+    :init
+    (progn (projectile-mode)))
+
+  (use-package ace-window
+    :ensure t
+    :init (global-set-key [remap other-window] 'ace-window))
+#+end_src
+
+** Edit
+   - [[https://github.com/victorhge/iedit][iedit]]
+#+begin_src emacs-lisp
+  (use-package iedit
+    :ensure t
+    :init (global-set-key (kbd "C-;") 'iedit-mode))
+#+end_src
+
+** Helper
+   - [[https://github.com/emacs-helm/helm][helm]]
+   - [[https://github.com/bbatsov/helm-projectile][helm-projectile]]
+   - [[https://github.com/justbur/emacs-which-key][which-key]]
+   - [[https://github.com/larstvei/Try][try]]
+#+begin_src emacs-lisp
+  (use-package helm
+    :ensure t
+    :init
+    (progn
+      (require 'helm)
+      (require 'helm-config)
+
+      (global-set-key (kbd "M-x") 'helm-M-x)
+      (global-set-key (kbd "C-x C-f") 'helm-find-files)
+      (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+      (global-set-key (kbd "C-x b") 'helm-mini)
+      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+      (global-set-key (kbd "C-z") 'helm-select-action)
+      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action))
+    :config
+    (progn
+      (when (package-installed-p 'swiper)
+	(use-package swiper-helm
+	  :ensure t
+	  :init (global-set-key (kbd "C-s") 'swiper-helm)))
+
+      (setq helm-split-window-in-side-p t
+	    helm-scroll-amount 8
+	    helm-ff-file-name-history-use-recentf t)
+
+      (helm-autoresize-mode 1)
+
+      (setq helm-buffers-fuzzy-matching t
+	    helm-recentf-fuzzy-match t)
+      (helm-mode 1)))
+
+  (use-package helm-projectile
+    :ensure t
+    :init (helm-projectile-on))
+
+  (use-package which-key
+    :ensure t
+    :init (which-key-mode))
+
+  (use-package try
+    :ensure t)
+#+end_src
+
 * Program Languages
-  - [[~/.emacs.d/org/utility.org][Utility]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/utility.org"))
-    #+end_src
+** Version Control
+   - [[https://github.com/magit/magit][magit]]
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :config
+    (progn
+      (global-set-key (kbd "C-x g") 'magit-status)
+      (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)))
+#+end_src
 
-  - [[~/.emacs.d/org/pythonpkg.org][Python]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/pythonpkg.org"))
-    #+end_src
+** Syntex Checker
+   - [[https://github.com/flycheck/flycheck][flycheck]]
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :ensure t)
+#+end_src
+** Python
+   - [[https://github.com/jorgenschaefer/elpy][elpy]]
+   - [[https://github.com/tkf/emacs-jedi][jedi]]
+#+begin_src emacs-lisp
+  ;; (setq python-shell-interpreter "jupyter"
+  ;; python-shell-interpreter-args "console --simple-prompt")
+  ;; (setq python-shell-prompt-detect-enabled nil)
+  ;; (setq python-shell-completion-native-enable nil)
 
-  - [[~/.emacs.d/org/orgpkg.org][Org-mode]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/orgpkg.org"))
-    #+end_src
+  (add-hook 'python-mode-hook 'flycheck-mode)
+  (add-hook 'python-mode-hook 'flyspell-prog-mode)
+  (add-hook 'python-mode-hook 'linum-mode)
 
-  - [[~/.emacs.d/org/latexpkg.org][Latex]]
-    #+begin_src emacs-lisp
-      (org-babel-load-file (expand-file-name "~/.emacs.d/org/latexpkg.org"))
-    #+end_src
+  (use-package elpy
+    :ensure t
+    :init
+    (progn
+      (add-hook 'python-mode-hook 'elpy-enable)))
+
+  (use-package jedi
+    :ensure t
+    :init
+    (progn
+      (add-hook 'python-mode-hook 'jedi:setup)
+      (setq jedi:setup-keys t)
+      (setq jedi:complete-on-dot t)
+      (add-hook 'python-mode-hook 'jedi:ac-setup)))
+#+end_src
+
+** Org
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :config
+    (progn
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+      (add-hook 'org-mode-hook 'flyspell-mode)
+      (add-hook 'org-mode-hook 'ac-ispell-ac-setup)))
+#+end_src
+
+** Latex
+   - auctex settings
+#+begin_src emacs-lisp
+  (use-package tex
+    :ensure auctex
+    :init
+    (progn 
+      (setq TeX-auto-save t)
+      (setq TeX-parse-self t)
+    
+      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    
+      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+      (setq reftex-plug-into-AUCTeX t)
+    
+      (setq TeX-PDF-mode t)
+    
+      (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin/"))  
+      (setq exec-path (append exec-path '("/Library/TeX/texbin/")))))
+#+end_src
+
+* System Key
+** macos command key
+#+begin_src emacs-lisp
+  (when (eq system-type 'darwin)
+    (setq mac-command-modifier 'control))
+#+end_src

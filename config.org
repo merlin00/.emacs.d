@@ -177,6 +177,8 @@
   (add-hook 'python-mode-hook 'flyspell-prog-mode)
   (add-hook 'python-mode-hook 'linum-mode)
 
+  (require 'pylay)
+
   (use-package elpy
     :ensure t
     :init

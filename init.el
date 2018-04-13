@@ -10,4 +10,6 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(push "~/.emacs.d/lisp" load-path)
+
 (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))

@@ -168,10 +168,10 @@
    - [[https://github.com/jorgenschaefer/elpy][elpy]]
    - [[https://github.com/tkf/emacs-jedi][jedi]]
 #+begin_src emacs-lisp
-  ;; (setq python-shell-interpreter "jupyter"
-  ;; python-shell-interpreter-args "console --simple-prompt")
-  ;; (setq python-shell-prompt-detect-enabled nil)
-  ;; (setq python-shell-completion-native-enable nil)
+  (setq python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt")
+  (setq python-shell-prompt-detect-enabled nil)
+  (setq python-shell-completion-native-enable nil)
 
   (add-hook 'python-mode-hook 'flycheck-mode)
   (add-hook 'python-mode-hook 'flyspell-prog-mode)

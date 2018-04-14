@@ -18,6 +18,7 @@
 
 ;;;###autoload
 (defun py:load-side-layout()
+  (interactive)
   (py:unload-side-layout)
   (add-hook 'window-size-change-functions 'py:resize-side-layout)
   
@@ -53,6 +54,7 @@
 
 ;;;###autoload
 (defun py:unload-side-layout()
+  (interactive)
   (delete-other-windows)
   (remove-hook 'window-size-change-functions 'py:resize-side-layout))
 
@@ -60,5 +62,7 @@
 (defun py:resize-side-layout(frame)
   (setq w:delta (- 50 (window-width w:run)))
   (window-resize w:run w:delta t))
+
+(defalias 'load-python 'py:load-side-layout)
 
 (provide 'pylay)

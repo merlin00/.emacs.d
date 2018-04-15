@@ -2,7 +2,10 @@
 (defvar w:info)
 (defvar w:ext)
 (defvar b:run)
+(defvar l:width)
 
+
+(setq l:width 60)
 
 (defun py:reset-run-signal(process event)
   (kill-buffer "*Python*")
@@ -25,7 +28,7 @@
   (setq w:run (split-window (selected-window) nil 'right))
   (setq w:ext (split-window w:run nil 'below))
 
-  (setq w:delta (- 50 (window-width w:run)))
+  (setq w:delta (- l:width (window-width w:run)))
   (window-resize w:run w:delta t)
 
   (setq w:delta (round (- (* (frame-pixel-height) 0.55) (window-pixel-height w:run))))
@@ -60,7 +63,7 @@
 
 
 (defun py:resize-side-layout(frame)
-  (setq w:delta (- 50 (window-width w:run)))
+  (setq w:delta (- l:width (window-width w:run)))
   (window-resize w:run w:delta t))
 
 (defalias 'load-python 'py:load-side-layout)

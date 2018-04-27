@@ -50,13 +50,17 @@
    - [[https://github.com/joaotavora/yasnippet][Yasnippet]]
    - [[https://github.com/syohex/emacs-ac-ispell][ac-ispell]]
 #+begin_src emacs-lisp
-  (use-package auto-complete
+  (use-package company
+    :ensure
+    :init (global-company-mode t))
+
+  (use-package company-quickhelp
     :ensure t
     :init
     (progn
-      (ac-config-default)
-      (setq ac-show-menu-immediately-on-auto-complete t)
-      (global-auto-complete-mode t)))
+      (eval-after-load 'company
+        '(define-key company-active-map
+           (kbd "C-c h") #'company-quickhelp-manual-begin))))
 
   (use-package yasnippet
     :ensure t
@@ -174,14 +178,15 @@
 ** Python
    - [[https://github.com/jorgenschaefer/elpy][elpy]]
    - [[https://github.com/tkf/emacs-jedi][jedi]]
+   - [[https://github.com/syohex/emacs-company-jedi][company-jedi]]
 #+begin_src emacs-lisp
   (setq python-shell-interpreter "jupyter"
         python-shell-interpreter-args "console --simple-prompt")
   (setq python-shell-prompt-detect-enabled nil)
   (setq python-shell-completion-native-enable nil)
 
-  (add-hook 'python-mode-hook 'flycheck-mode)
   ;;(add-hook 'python-mode-hook 'flyspell-prog-mode)
+  (add-hook 'python-mode-hook 'flycheck-mode)
   (add-hook 'python-mode-hook 'linum-mode)
 
   (require 'pylay)
@@ -189,15 +194,23 @@
   (use-package elpy
     :ensure t
     :init (elpy-enable))
-     
-  (use-package jedi
+
+  (use-package company-jedi
     :ensure t
     :init
     (progn
-      (add-hook 'python-mode-hook 'jedi:setup)
-      (setq jedi:setup-keys t)
-      (setq jedi:complete-on-dot t)
-      (add-hook 'python-mode-hook 'jedi:ac-setup)))
+      (add-hook 'python-mode-hook
+                (lambda ()
+                  (add-to-list 'company-backend 'company-jedi)))))
+     
+  ;; (use-package jedi
+  ;;  :ensure t
+  ;;  :init
+  ;;  (progn
+  ;;    (add-hook 'python-mode-hook 'jedi:setup)
+  ;;    (setq jedi:setup-keys t)
+  ;;    (setq jedi:complete-on-dot t)
+  ;;    (add-hook 'python-mode-hook 'jedi:ac-setup)))
 #+end_src
 
 ** Org
